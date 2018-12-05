@@ -1,0 +1,43 @@
+下面是支持的查询类型，每三条数据分别对应：（方法后缀，方法例子，mongodb原生查询语句）
+	GreaterThan(大于)
+	findByAgeGreaterThan(int age)
+	{"age" : {"$gt" : age}}
+
+	LessThan（小于）
+	findByAgeLessThan(int age)
+	{"age" : {"$lt" : age}}
+
+	Between（在...之间）
+	findByAgeBetween(int from, int to)
+	{"age" : {"$gt" : from, "$lt" : to}}
+
+	IsNotNull, NotNull（是否非空）
+	findByFirstnameNotNull()
+	{"age" : {"$ne" : null}}
+
+	IsNull, Null（是否为空）
+	findByFirstnameNull()
+	{"age" : null}
+
+	Like（模糊查询）
+	findByFirstnameLike(String name)
+	{"age" : age} ( age as regex)
+
+	(No keyword) findByFirstname(String name)
+	{"age" : name}
+
+	Not（不包含）
+	findByFirstnameNot(String name)
+	{"age" : {"$ne" : name}}
+
+	Near（查询地理位置相近的）
+	findByLocationNear(Point point)
+	{"location" : {"$near" : [x,y]}}
+
+	Within（在地理位置范围内的）
+	findByLocationWithin(Circle circle)
+	{"location" : {"$within" : {"$center" : [ [x, y], distance]}}}
+
+	Within（在地理位置范围内的）
+	findByLocationWithin(Box box)
+	{"location" : {"$within" : {"$box" : [ [x1, y1], x2, y2]}}}

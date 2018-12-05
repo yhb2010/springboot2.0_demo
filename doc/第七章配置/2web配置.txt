@@ -1,0 +1,30 @@
+undertow:
+	spring-boot-starter-undertow
+jetty:
+	spring-boot-starter-jetty
+tomcat:
+	spring-boot-starter-tomcat
+
+默认是Tomcat，但undertow的性能优于tomcat。
+
+server.tomcat.*包含了tomcat的相关配置：
+	server.tomcat.accesslog.enabled=false打开tomcat访问日志
+	server.tomcat.accesslog.directory=logs访问日志所在目录
+	server.tomcat.accept-count允许http请求缓存到请求队列的最大个数，默认不限制
+	server.tomcat.max-connections最大连接数，默认不限制，如果一旦连接数到达，剩下的连接将会保存到请求缓存队列里，也就是accept-count指定
+	队列
+	server.tomcat.max-threads最大工作线程数
+	server.tomcat.max-http-port-size：http post内容最大长度，默认不限制
+
+server.undertow.*的相关配置：
+	server.undertow.accesslog.enabled=false打开undertow访问日志
+	server.undertow.accesslog.directory=logs访问日志所在目录
+	server.undertow.io-threads创建工作线程的io线程，默认为2或者cpu的个数
+	server.undertow.worker-threads工作线程个数，默认为io线程个数的8倍
+	server.tomcat.max-http-port-size：http post内容最大长度，默认不限制
+
+server.jetty.*的相关配置：
+	server.jetty.accesslog.enabled=false
+	server.jetty.accesslog.directory=logs
+	server.jetty.acceptors：acceptors线程个数，用来接受访问请求，相当于工作线程
+	server.jetty.selectors：selectors线程个数，和cpu个数相关，默认是可用(cpu+1)/2，用于分配请求给工作线程

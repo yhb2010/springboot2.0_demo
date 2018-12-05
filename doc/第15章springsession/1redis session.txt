@@ -1,0 +1,4 @@
+spring session的redis实现并不是每次通过session类获取会话信息或者保存的时候都会调用redis操作，它会先尝试从内部的hashMap读取值，
+如果没有，才调用redis的hmget操作。同样，当保存会话的时候，也没有立即调用redis操作，而是先保存在HashMap中，等待服务请求结束后，再
+将变化的值使用hmset更新。如果你想在保存会话操作后立即更新到redis，需要配置immediate模式：
+	spring.session.redis.flushMode=immediate(大写)

@@ -1,0 +1,12 @@
+需要在resources下创建application-{profile}.yml配置文件，profile可以是任意名字：
+	1、test
+	2、prod
+	3、pre-prod等等
+在环境变量中，spring.profile.active指定使用哪个profile，比如：
+	java -jar -Dspring.profile.active=test boot.jar
+
+如果考虑到开发环境不应该有线上环境的配置信息，可以将配置文件放到指定的目录中，并用spring.config.location指定配置文件的目录：
+	java -jar -Dspring.config.location=file:env/ -Dspring.profile.active=test boot.jar
+	配置文件在当前目录的env目录下，profile是test，因此读取的是application-test.yml配置文件。
+
+spring.config.name指定配置文件名字，默认是application

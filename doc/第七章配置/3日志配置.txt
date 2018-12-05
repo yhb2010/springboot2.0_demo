@@ -1,0 +1,23 @@
+默认情况下不需要任何配置就可以使用日志，使用logBack作为日志实现，使用apache Commons Logging作为日志接口，因此代码中通常是：
+	public class Helloworld{
+		private Log log = LogFactory.getLog("Helloworld.class");
+	}
+
+日志每行内容如下：
+	1、日期和时间
+	2、日志级别
+	3、进程id，springboot应用的进程id
+	4、---分隔符，后面是日志消息
+	5、[XXX]线程名称
+	6、类名
+	7、消息体
+
+默认情况下，info级别以上的消息才会打印到控制台，可以自己设置日志输出级别，比如：
+	logging.level.root=info默认是info
+	logging.level.org=warn：org开头的一般是第三方jar包，使用warn即可
+	logging.level.com.yourcorp=debug：com.yourcorp自己的jar可以使用debug
+
+logging.file=my.log：日志输出到my.log
+logging.path=e:/temp/log：日志输出路径，当日志到达10M，会自动重新生成一个新的日志文件。
+
+也可以通过在resources目录下使用logback.xml或者logback-spring.xml来对logback进行更详细的配置。

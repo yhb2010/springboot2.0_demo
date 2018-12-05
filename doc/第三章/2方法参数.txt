@@ -1,0 +1,27 @@
+方法可以接收以下参数：
+	1、@PathVariable：可以将url中的值映射到方法的参数中
+	2、Model，spring中通用的mvc模型，也可以使用Map或者ModelMap作为渲染视图的模型
+	3、ModelAndView：包含了视图路径和模型的对象
+	4、JavaBean：将http参数映射到JavaBean对象
+	5、MultipartFile，用于处理文件上传
+	6、@ModelAttribute：使用该注解的变量将作为Model的一个属性
+	7、WebRequest或者NativeWebRequest：类似Servlet Request，但做了一定封装
+	8、java.io.InputStream和java.io.Reader，用来获取Servlet API中的InputStream/Reader
+	9、java.io.OutputStream和java.io.Writer，用来获取Servlet API中的OutputStream/Writer
+	10、HttpMethod，枚举类型，对应于POST、GET等
+	11、@MatrixVariable：矩阵变量
+	12、@RequestParam：对应http请求参数，自动转化为参数对应的类型
+	13、@RequestHeader，对应于http请求头参数，自动转换为对应的类型
+	14、@RequestBody：自动将请求内容转为指定的对象，默认使用HttpMessageConverters来转化
+	15、@RequestPart：用于文件上传，对应于http协议的multipart/form-data
+	16、@SessionAttribute，该方法标注的变量来自于session的属性
+	17、@RequestAttribute，该标注的变量来自于Request的属性
+	18、@InitBinder，用在方法上，说明这个方法会注册多个转化器，用来个性化的将http请求参数转化成对应的java对象，如转化为日期类型，
+	浮点类型，javaBean等，当然，也可以实现WebBindingInitialize接口来用于Spring Boot应用所需要的dataBinder
+	19、BindingResult和Errors，用于处理绑定过程中的错误
+
+spring有如下表所示的http参数到javabean的映射规则：
+	1、name：对象的name属性
+	2、order.name：对象的order属性的name属性
+	3、details[0].name：对象的details属性，要求details是个数组或者List（不能是Set，因为Set不具备根据索引取值的功能），details
+	[0]表示details属性的第一个元素

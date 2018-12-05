@@ -1,0 +1,8 @@
+url路径匹配：
+	1、路径上可以使用通配符，*匹配任意字符、**匹配任意路径、?匹配单个字符
+	/user/*.html匹配/user/1.html、/user/22.html
+	/**/1.html匹配/1.html、/user/1.html、/user/add/1.html
+	/user/?.html匹配/user/1.html、/user/2.html
+如果一个请求有多个@RequestMapping能够匹配，通常是更具体的匹配会作为处理此请求的方法。
+url映射也可以使用${}来获取系统的配置或者环境变量，通常controller路径是通过配置文件设定的情况：
+	@RequestMapping("/${query.all}.json")

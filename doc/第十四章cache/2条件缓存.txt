@@ -1,0 +1,15 @@
+//@Cacheable将在执行方法之前( #result还拿不到返回值)判断condition，如果返回true，则查缓存；
+@Cacheable(value = "user", key = "#id", condition = "#id lt 10")
+public User conditionFindById(final Long id)
+
+//@CachePut将在执行完方法后（#result就能拿到返回值了）判断condition，如果返回true，则放入缓存；
+@CachePut(value = "user", key = "#id", condition = "#result.username ne 'zhang'")
+public User conditionSave(final User user)
+
+//@CachePut将在执行完方法后（#result就能拿到返回值了）判断unless，如果返回false，则放入缓存；（即跟condition相反）
+@CachePut(value = "user", key = "#user.id", unless = "#result.username eq 'zhang'")
+public User conditionSave2(final User user)
+
+//@CacheEvict， beforeInvocation=false表示在方法执行之后调用（#result能拿到返回值了）；且判断condition，如果返回true，则移除缓存；
+@CacheEvict(value = "user", key = "#user.id", beforeInvocation = false, condition = "#result.username ne 'zhang'")
+public User conditionDelete(final User user)

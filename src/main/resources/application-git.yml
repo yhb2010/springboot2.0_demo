@@ -1,0 +1,123 @@
+server:
+  port: 8083
+beetlsql:
+  nameConversion: org.beetl.sql.core.DefaultNameConversion
+  basePackage: com.demo.springboot2
+spring:
+  # spring.mvc.date-format：处理日期(地址参数是日期字符串，在Controller使用Date接收)
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.1.1:3306/test?allowMultiQueries=true
+    username: name
+    password: pass
+  jpa:
+    show-sql: true
+    hibernate:
+      naming:
+        # 对于PhysicalNamingStrategyStandardImpl有DefaultNamingStrategy的效果，对于SpringPhysicalNamingStrategy有ImprovedNamingStrategy的效果。
+        # The ImprovedNamingStrategy will convert CamelCase to SNAKE_CASE where as the EJB3NamingStrategy just uses the table name unchanged.
+        # If you don't want to change the naming strategy you could always just specify your column name in lowercase:
+        # @Column(name="testname")
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  data:
+    mongodb:
+      #mongodb://username:password@mongo.accset1.com:30000,mongo.accset2.com:30000,mongo.accset3.com:30000/accMongo
+      uri: mongodb://name:pass@192.168.1.1:30000/test
+      sqlLimitSize: 10000
+      limitSize: 50000
+  session:
+    store-type: Redis # 用redis管理session
+  redis:
+    cluster:
+      nodes: 192.168.1.1:7001,192.168.1.1:7002,192.168.1.1:7001
+    port: 7001
+    lettuce:
+      shutdown-timeout: 100ms
+      pool: # 1.5.x jedis、2.x lettuce
+        min-idle: 0
+        max-active: 8 #最大连接数，0表示无限制
+        max-wait: -1ms
+        max-active: 8
+  cache:
+    # type: Simple # 使用spring自带的内存管理器，Simple只适合于单体应用或开发环境，基于ConcurrentHashMap实现的缓存
+    type: Redis
+    # none：暂时关闭缓存
+    # redis：使用redis作为缓存
+    # Generic：用户自定义缓存实现，需要实现一个CacheManager
+
+zk:
+  url: 192.168.1.1:2181,192.168.1.1:2181,192.168.1.1:2181 # zk集群
+  basePath: /service # 服务注册发现的根节点
+  masterPath: /curator_recipes_master_path # 主节点
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb: debug #mongodb日志级别
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" # 开启所有actuator监控
+      base-path: /manage # 修改监控路径
+
+redis:
+  servers: 192.168.1.1:7001 192.168.1.1:7002 192.168.1.1:7001
+  databases: 4
+  maxAttempts: 2
+  maxTotal: 1024
+  maxIdle: 1024
+  minIdle: 32
+  timeout: 100
+  soTimeout: 200
+  maxWaitMillis: 300
+  appName: demo
+  scanShortNameBasePackage: com.shopcart # 简称类的位置
+
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+
+# automatic+jta
+mysql:
+  datasource:
+    car:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://192.168.1.1:3306/test
+      username: name
+      password: pass
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      filters: stat,wall,log4j
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    test:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://192.168.1.1:3306/test1
+      username: name
+      password: pass
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      filters: stat,wall,log4j
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000

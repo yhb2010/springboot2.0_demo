@@ -1,0 +1,36 @@
+一、常用规则速查
+
+1　　 And　　　　并且
+2　　 Or　　　　  或
+3　　 Is,Equals　　　　等于
+4　　 Between　　　　  两者之间
+5　　 LessThan　　　　　　小于
+6　　 LessThanEqual   　　小于等于
+7　　 GreaterThan　　　　 大于
+8　　 GreaterThanEqual　  大于等于
+9　　 After　　　　之后（时间） >
+10　　Before　　　 之前（时间） <
+11　　IsNull　　　　　　　　等于Null
+12　　IsNotNull,NotNull　　 不等于Null
+13　　Like　　　　模糊查询。查询件中需要自己加 %
+14　　NotLike     不在模糊范围内。查询件中需要自己加 %
+15　　StartingWith　　以某开头
+16　　EndingWith　　  以某结束
+17　　Containing　　　包含某
+18　　OrderBy　　排序
+19　　Not　　　　不等于
+20　　In　　　　 某范围内
+21　　NotIn　　  某范围外
+22　　True　　　　真
+23　　False　　　 假
+24　　IgnoreCase　　忽略大小写
+
+
+方法名通常包含多个实体属性用于查询，属性之间可以使用AND或者OR连接，也支持Between、LessThan、GreaterThan、Like
+方法名可以以findBy、getBy、queryBy开头
+查询结果可以排序，方法名包含OrderBy+属性+ASC(DESC)
+可以通过Top、First来限定查询结果集
+一些特殊参数可以出现在参数列表里，比如Pageable、Sort
+
+在spring data的query构造也适合于nosql，在大部分spring boot应用中，query构造都只能创建一些简单的查询，但对于nosql来说已经够了，
+不需要自己再构造nosql查询。

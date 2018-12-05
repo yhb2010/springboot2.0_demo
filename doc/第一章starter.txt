@@ -1,0 +1,24 @@
+各种常用的starter：
+	spring-boot-starter-web：web开发支持，默认使用tomcat8
+	spring-boot-starter-aop：aop开发支持，使用AspectJ
+	spring-boot-starter-jdbc：spring JDBC
+	spring-boot-starter-data-jpa：jpa方式访问数据库，使用hibernate作为jpa实现
+	spring-boot-starter-data-elasticsearch：集成elasticsearch，默认访问localhost:9200
+	spring-boot-starter-data-redis：集成redis，使用JRedis，默认连接localhost:6379
+	spring-boot-starter-cache：缓存，支持多种缓存方式，如本地的、Redis的、Ehcache等
+	spring-boot-devtools：应用程序快速启动的工具，提升开发体验
+	spring-boot-starter-data-mongodb：集成mongodb，默认访问mongodb://localhost/test
+	spring-boot-starter-data-neo4j：集成neo4j，默认访问localhost:7474
+	spring-boot-starter-data-gemfire：集成分布式缓存
+	spring-boot-starter-data-solr：基于Apache lucene的搜索平台，默认访问localhost:8983/solr
+	spring-boot-starter-data-cassandra：集成Cassandra，默认访问localhost:7474
+	spring-boot-starter-data-ldap：集成ldap
+	spring-boot-starter-activemq：消息集成ActiveMQ支持
+	spring-boot-starter-amqp：消息集成AMQP协议支持，如支持RabbitMQ
+	spring-boot-starter-jta-atomikos：分布式事务支持，使用atomikos
+	spring-boot-starter-jta-bitronix：一个开源的分布式事务支持
+	spring-boot-starter-test：包含JUnit、Spring Test、Hamcrest、Mockito等测试工具
+	spring-boot-starter-webservices：webservice支持
+	spring-boot-starter-websocket：websocket支持
+	spring-boot-starter-jersey：REST应用和Jersey支持
+	spring-boot-starter-freemarker：Freemark支持

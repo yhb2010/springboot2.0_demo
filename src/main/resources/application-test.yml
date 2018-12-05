@@ -1,0 +1,20 @@
+server:
+  port: 8083
+beetlsql:
+  nameConversion: org.beetl.sql.core.DefaultNameConversion
+  basePackage: com.demo.springboot2
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.87:port/dbName?allowMultiQueries=true
+    username: 123
+    password: 123
+  jpa:
+    show-sql: true
+    hibernate:
+      naming:
+        # 对于PhysicalNamingStrategyStandardImpl有DefaultNamingStrategy的效果，对于SpringPhysicalNamingStrategy有ImprovedNamingStrategy的效果。
+        # The ImprovedNamingStrategy will convert CamelCase to SNAKE_CASE where as the EJB3NamingStrategy just uses the table name unchanged.
+        # If you don't want to change the naming strategy you could always just specify your column name in lowercase:
+        # @Column(name="testname")
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl

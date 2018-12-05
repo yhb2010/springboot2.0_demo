@@ -1,0 +1,10 @@
+server.address：服务器ip绑定地址，如果你的主机上有多个网卡，可以绑定一个ip地址
+server.session.timeout：会话过期时间，单位是秒
+server.error.path：服务器出错后的处理路径/error
+server.servlet.contextpath：应用上下文
+server.port：应用监听端口
+
+设置方式：
+	1、在yml文件里
+	2、命令行:java -jar boot.jar --server.port=9000
+	3、传入虚拟机系统属性:java -Dserver.port=9000 -jar boot.jar

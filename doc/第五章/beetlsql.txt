@@ -1,0 +1,83 @@
+isEmpty：判断变量是否存在，以及是否为null
+print：println输出变量
+debug：将变量值输出到控制台
+text：占位符中输出变量对应的文本
+join：用逗号连接数组或集合，通常用于in操作
+	select * from user where userID in (#join(ids)#)
+	相当于select * from user where userID in (?, ?, ?)
+use：可以重用当前sql文件的一段模板
+	condition
+	===
+		where 1=1 and name = #name#
+	selectUser
+	===
+		select * from user #use("condition")#
+		还可以传参数：
+		select * from user #use("condition", {'para1':para})#
+globalUse用法同use，参数是其它文件的sql片段
+	selectUser
+	===
+		select * from user #use("share.condition")#将访问share.md的condition
+trim：能删除标签内的前后缀，默认不传参数，删除最后的逗号
+	updateStatus
+	===
+		update user set
+		@trim(){
+			@if(!isEmpty(age)){
+				age = #age#,
+			@} if(!isEmpty(status)){
+				status = #status#,
+			@}
+		@}
+		where id = #id#
+		会删除最后的逗号。
+
+
+
+支持复合主键：
+	User key = new User();
+	key.setId1()
+	key.setId2()
+	User user = sqlManager.unique(key)
+
+
+@EnumMapping如果属性是枚举，可以通过此注解来指定如何将数据库的值转化为枚举
+	@EnumMapping("value")
+	public enum Color{
+		RED("RED", 1), BLUE("BLUE", 2);
+		private String name;
+		private int value;
+		private Color(String name, int value){
+			this.name = name;
+			this.value = value;
+		}
+		//省略get方法
+	}
+	@EnumMapping中的属性"value"指明了转化的属性，BeetlSQL会根据数据返回的值来匹配对应的枚举值，同样会将枚举的该属性的值保存到数据
+	库中。
+
+@Table指明了数据库表名和java类名的对应关系，用于BeetlSQL自带的NameConversion不能满足需求的情况下，比如数据库名是T_SYS_USER，
+java类名是SysUser：
+	@Table(name="T_SYS_USER")
+	public class SysUser{}
+
+@SqlResource指定md文件的路径：
+	@SqlResource("platform.sysDict")
+	public interface SysDictDao extends BaseMApper<SysDict>{
+		public List<SysDict> findAll(@Param(value="type") String type);
+	}
+	以上findAlll方法对应的sql位于resources/sql/platform/sysDict.md中
+
+NameConversion：
+	UnderlinedNameConversion，将数据库表和字段名字全部小写，删除下划线，采用java驼峰命名，比如SYS_USER对应SysUser。
+	DefaultNameConversion，数据库和字段名字不做任何变化。
+
+悲观锁：
+	BaseMapper中有api：T lock(Object key)，相当于select * from table where id = ? for update
+	api返回意味着获得了该悲观锁，如果没有获得悲观锁，则一直处于等待。悲观锁的释放通常是在事务结束后，如果在其他框架下使用beetlSQL，
+	请确保是在事务环境下调用的lock方法。
+乐观锁：
+	通过在实体类上使用@Version来提供，此属性必须是Integer或Long。当调用内置的updateById或者updateTemplateById时，被@Version
+	注释的字段将作为where条件的一部分。
+	update table set name = #name#, version = version+1 where version = #version# and id = #id#
+	如果更新失败，updateById返回0，如果返回1说明更新成功，同时版本号加1.

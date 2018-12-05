@@ -1,0 +1,14 @@
+在线文档：http://ibeetl.com/guide/#beetlsql
+
+表qz_chapter对应的类是QzChapter.java，md文件是qzChapter.md
+查找md文件的时候，会先看sql目录下是否有与数据库同名的文件夹，如果有，则先在其目录下寻找匹配的sqlId，如果没有找到，才会在sql目录下找。
+
+beetlsql.sqlPath：默认是/sql，作为存放sql文件的根目录。位于/resources/sql目录下
+beetlsql.nameConversion：默认是org.beetl.sql.core.UnderlinedNameConversion，能够将下划线分割的数据库命名风格转化为java
+驼峰命名风格，还有常用的DefaultNameConversion，数据库命名完全和java命名一致，以及JPA2NameConversion，兼容JPA命名
+beetl-beetlsql.dev：默认是true，即向控制台输出执行时的sql，包括参数、执行时间、执行位置，每次修改sql文件时，自动检测sql文件修改。
+beetlsql.daoSuffix：默认是Dao，在springboot启动的时候会自动扫描以Dao结尾的接口，自动注册为spring管理的Dao类，你可以在任意地方
+注入这个Dao类。
+beetlsql.basePackage：默认为com，此选项配合daoSuffix来自动扫描com包及其子包下的所有以Dao结尾的Mapper类。
+beetlsql.dbStyle：数据库风格，默认是org.beetl.sql.core.db.MySqlStyle，对应不同的数据库，还有OracleStyle、PostgresStyle、
+SqlServerStyle、DB2SqlStyle、SQLiteStyle、H2Style

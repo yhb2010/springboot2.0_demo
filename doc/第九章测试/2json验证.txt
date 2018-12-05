@@ -1,0 +1,25 @@
+假设json格式：
+{
+	"store":{
+		"book":[
+			{
+				"author":"zsl",
+				"title":"nigei rees",
+				"price":20
+			},
+			{
+				"author":"lisi",
+				"title":"evelyn waugh",
+				"price":7
+			}
+		]
+	}
+}
+更多内容参考https://github.com/json-path/JsonPath
+$.store.book[*].author：所有book的author
+$..author：所有author
+$.store.*：store下所有节点
+$..book[2]：第三个book节点
+$..book.length()：返回book节点的个数
+$..book[0,1]：第一个和第二个book节点
+$.store.book[?(@.price<10)]：所有price小于10的节点，[?()]包含了表达式，@代表当前节点

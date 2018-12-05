@@ -1,0 +1,33 @@
+可以查看监控以下信息：
+	1、springboot配置信息
+	2、springboot配置的bean信息
+	3、最近请求的http信息
+	4、数据源、nosql等数据状态
+	5、在线查看日志内容，在线日志配置修改
+	6、所有@RequestMapping注解的url路径
+	7、自动装配信息汇总
+	8、打印虚拟机的线程栈
+	9、dump内存
+	10、应用的各种指标汇总
+	11、自定义监控指标
+
+http://127.0.0.10:8083/manage/health
+	输出健康诊断信息
+http://127.0.0.10:8083/manage/httptrace
+	http请求和响应，默认最近100条
+http://127.0.0.10:8083/manage/loggers
+	日志内容
+http://127.0.0.10:8083/manage/threaddump
+	线程栈信息
+http://127.0.0.10:8083/manage/heapdump
+	生成内存镜像
+http://127.0.0.10:8083/manage/mappings
+	所有@RequestMapping设置的url映射
+http://127.0.0.10:8083/manage/beans
+	spring管理的beans
+http://127.0.0.10:8083/manage/metrics
+	显示springboot性能指标，如已有内存、未占用内存、垃圾回收次数、类信息等
+http://127.0.0.10:8083/manage/env
+	显示springboot的环境变量，如jdk使用版本、加载的jar包、配置文件信息、日志文件信息
+http://127.0.0.10:8083/manage/configprops
+	所有@ConfigurationProperties注解的配置信息，如文件上传的最大允许配置等
