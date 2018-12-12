@@ -1,8 +1,6 @@
 package com.validation;
 
 import java.util.Set;
-
-import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
